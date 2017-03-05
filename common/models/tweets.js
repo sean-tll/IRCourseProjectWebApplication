@@ -19,7 +19,7 @@ module.exports = function(Tweets) {
         collection.find({}).toArray(function(err, data){
           var accessToken = data[0].accessToken;
           var accessSecret = data[0].accessSecret;
-          //console.log(accessToken);
+          mongoose.connection.close();
           var Twitter = require('twitter');
           var client = new Twitter({
             consumer_key: 'jl4fX4tqUt7AHlFWqV3ws2rtr',

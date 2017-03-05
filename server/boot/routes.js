@@ -40,7 +40,6 @@ module.exports = function(app) {
             accessToken : String,
             accessSecret : String
           });
-          //var Oauth = mongoose.model('User', OauthSchema);
 
           let Oauth
           try {
@@ -65,12 +64,12 @@ module.exports = function(app) {
               content.save(function (err, data) {
                 if (err) console.log(err);
                 else {
-                  console.log('Saved : ', data );
+                  // console.log('Saved : ', data );
                   mongoose.connection.close();
                 }
               });
 
-              res.sendFile(pt('client/app/index.html'));
+              res.sendFile(pt('client/app/logout.html'));
             }
 
           });
@@ -88,6 +87,31 @@ module.exports = function(app) {
 
     app.get('/homeline', function(req, res) {
      res.sendFile(pt('client/app/homeline.html'));
+    });
+
+    app.get('/logout', function(req, res) {
+      mongoose.connection.close();
+      mongoose.connect('mongodb://127.0.0.1:27017');
+      var Schema = mongoose.Schema;
+      var OauthSchema = new Schema({
+        accessToken : String,
+        accessSecret : String
+      });
+
+      let Oauth
+      try {
+        Oauth = mongoose.model('users');
+      } catch (error) {
+        Oauth = mongoose.model('users', OauthSchema);
+      }
+      Oauth.remove({}, function(err) {
+        if (err) {
+          console.log(err);
+        }
+        mongoose.connection.close();
+      });
+
+      res.sendFile(pt('client/app/index.html'));
     });
 
 };

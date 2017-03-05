@@ -1,5 +1,7 @@
 'use strict';
 
+var mongoose = require('mongoose');
+
 module.exports = function(Tweets) {
 
   Tweets.getTweets = function(cb) {
@@ -8,25 +10,42 @@ module.exports = function(Tweets) {
       console.log(info);
     });
 
-    var Twitter = require('twitter');
-    var client = new Twitter({
-      consumer_key: 'jl4fX4tqUt7AHlFWqV3ws2rtr',
-      consumer_secret: '4xdGpeno82DqDMKhBzziay95MWp7vST2FXURGTEy7cMIpWvXzl',
-      access_token_key: '412759714-aQFvDDSJ9AkIRqemAOE0SaowZDGzfYStYBc36F2z',
-      access_token_secret: 'w2iwqkQJSYU8hu8IsYFxGky72nphERoTb9yCfqprBo8Lf'
+    mongoose.connection.close();
+    mongoose.connect('mongodb://127.0.0.1:27017');
+    var connection = mongoose.connection;
+    connection.on('error', console.error.bind(console, 'connection error:'));
+    connection.once('open', function () {
+      connection.db.collection("users", function(err, collection){
+        collection.find({}).toArray(function(err, data){
+          var accessToken = data[0].accessToken;
+          var accessSecret = data[0].accessSecret;
+          //console.log(accessToken);
+          var Twitter = require('twitter');
+          var client = new Twitter({
+            consumer_key: 'jl4fX4tqUt7AHlFWqV3ws2rtr',
+            consumer_secret: '4xdGpeno82DqDMKhBzziay95MWp7vST2FXURGTEy7cMIpWvXzl',
+            access_token_key: accessToken,
+            access_token_secret: accessSecret
+          });
+
+          var res = [];
+          client.get('statuses/home_timeline', {count : 50}, function(error, tweets, response) {
+            if(error) {
+              console.log(error);
+              throw error;
+            }
+            //console.log(tweets);
+            res = tweets;
+            Tweets.storeTweets(tweets);
+            cb(null, res);
+          });
+        })
+      });
     });
 
-    var res = [];
-    client.get('statuses/home_timeline', {count : 50}, function(error, tweets, response) {
-      if(error) {
-        console.log(error);
-        throw error;
-      }
-      //console.log(tweets);
-      res = tweets;
-      Tweets.storeTweets(tweets);
-      cb(null, res);
-    });
+
+
+
   };
 
   Tweets.getTweetsByCategory = function(tweet_id, cb) {

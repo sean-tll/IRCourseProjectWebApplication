@@ -1,0 +1,26 @@
+{
+  "name": "TweetClassifierApp",
+  "homepage": "https://github.com/sean-tll/IRCourseProject",
+  "authors": [
+    "Sean-tll <tianshu.zhou@hotmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "animate.css": "^3.5.2",
+    "angular-route": "^1.6.1",
+    "angular-ui-router": "^0.3.2",
+    "angular-resource": "^1.6.1",
+    "ngtweet": "^0.6.1"
+  }
+}

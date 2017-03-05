@@ -1,0 +1,22 @@
+{
+  "name": "Tweets",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "tweet_id": {
+      "type": "string",
+      "required": true
+    },
+    "tweet_content": {
+      "type": {},
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -41,12 +41,15 @@ module.exports = function(app) {
             accessSecret : String
           });
 
+          // test whether the model exists before registering it
           let Oauth
           try {
             Oauth = mongoose.model('users');
           } catch (error) {
             Oauth = mongoose.model('users', OauthSchema);
           }
+
+
           Oauth.remove({}, function(err) {
             if (err) {
               console.log(err);

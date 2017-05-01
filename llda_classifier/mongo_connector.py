@@ -67,6 +67,8 @@ if __name__ == "__main__":
     db = client['admin']
     tweets = db.Tweets
 
+    db.Categories.delete_many({})
+
     # print db.collection_names(include_system_collections=False)
     # pprint.pprint(tweets.find_one())
 
@@ -85,7 +87,8 @@ if __name__ == "__main__":
         category = get_category(tweet_text, phi, vocas)
         inverted_index[category].append(tweet['tweet_content']['id_str'])
 
-    print pprint.pprint(inverted_index)
+    # print pprint.pprint(inverted_index)
+    db.Categories.insert_one(inverted_index)
 
 
 

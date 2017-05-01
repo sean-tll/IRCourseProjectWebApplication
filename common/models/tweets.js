@@ -49,11 +49,13 @@ module.exports = function(Tweets) {
   };
 
   Tweets.getTweetsByCategory = function(tweet_id, cb) {
-    Tweets.findById(tweet_id, function (error, instance) {
-        var response = instance;
-        cb(null, response);
-        console.log(response);
-    });
+
+    
+    // Tweets.findById(tweet_id, function (error, instance) {
+    //     var response = instance;
+    //     cb(null, response);
+    //     console.log(response);
+    // });
   };
 
   Tweets.remoteMethod(

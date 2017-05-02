@@ -43,9 +43,6 @@ module.exports = function(Tweets) {
       });
     });
 
-
-
-
   };
 
   Tweets.getTweetsByCategory = function(category, cb) {
@@ -65,7 +62,7 @@ module.exports = function(Tweets) {
         cb(null, docs[0][category]);
       });
     });
-    
+
   };
 
   Tweets.remoteMethod(

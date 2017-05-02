@@ -53,11 +53,28 @@
 
     </div>
 
+
     <div class="container" id="main" ng-controller="TweetsController as controller">
 
-      <div class="row tweets">
+      <div class="row">
+        <div class="btn-group" role="group" aria-label="...">
+          <button type="button" class="btn btn-info" ng-click="showAllTweets()">All</button>
+          <button type="button" class="btn btn-info" ng-repeat="tag in tags" ng-click="showTweetsByCategory(tag)">{{tag}}</button>
+        </div>
+      </div>
+
+
+
+      <div class="row tweets" ng-show="all">
         <div class="col-sm-4" ng-repeat="tweet in tweets">
           <twitter-widget twitter-widget-id="tweet.id_str">
+          </twitter-widget>
+        </div>
+      </div>
+
+      <div class="row tweets" ng-show="!all">
+        <div class="col-sm-4" ng-repeat="tweet in labeledTweets">
+          <twitter-widget twitter-widget-id="tweet">
           </twitter-widget>
         </div>
       </div>

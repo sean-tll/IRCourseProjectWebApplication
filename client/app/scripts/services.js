@@ -8,4 +8,8 @@ angular.module('tweetApp').constant("baseURL","http://0.0.0.0:3000/api/Tweets/")
       return $resource(baseURL+"getTweets", null,  {'query':{method:'Get', isArray:true}});
     };
 
+    this.getTweetsByCategory = function(category){
+      return $resource(baseURL+"getTweetsByCategory", {category:category},  {'query':{method:'Get', isArray:true}});
+    };
+
 }]);

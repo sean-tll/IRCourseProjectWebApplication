@@ -102,7 +102,7 @@ module.exports = function(Tweets) {
         //console.log(info);
       });
     }
-    PythonShell.run('./llda_classifier/mongo_connector.py', function (err) {
+    PythonShell.run('./llda_classifier/classifier.py', function (err) {
       if (err) throw err;
       console.log('finished');
     });

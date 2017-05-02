@@ -1,6 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var PythonShell = require('python-shell');
+
 
 module.exports = function(Tweets) {
 
@@ -100,6 +102,10 @@ module.exports = function(Tweets) {
         //console.log(info);
       });
     }
+    PythonShell.run('./llda_classifier/mongo_connector.py', function (err) {
+      if (err) throw err;
+      console.log('finished');
+    });
   };
 
 };

@@ -41,7 +41,7 @@ def get_category(text, phi, vocas):
                 prob_arr[i] = prob_arr[i] + abs(math.log(float(phi[i][index])))
                 # print phi[i][index]
 
-    prob_arr[0] = prob_arr[0] * 100
+    prob_arr[0] = (prob_arr[0] + 1) * 1000
 
     return labels[prob_arr.index(min(prob_arr))]
 
@@ -50,13 +50,13 @@ if __name__ == "__main__":
     phi = []
     vocas = []
 
-    with open('data/vocas.csv', 'rb') as file:
+    with open('./llda_classifier/data/vocas.csv', 'rb') as file:
         csv_file = csv.reader(file)
         for row in csv_file:
             for i in range(len(row)):
                 vocas.append(row[i])
 
-    with open('data/phi.csv', 'rb') as file:
+    with open('./llda_classifier/data/phi.csv', 'rb') as file:
         csv_file = csv.reader(file)
         for row in csv_file:
             phi.append(row)
@@ -89,9 +89,3 @@ if __name__ == "__main__":
 
     # print pprint.pprint(inverted_index)
     db.Categories.insert_one(inverted_index)
-
-
-
-
-
-

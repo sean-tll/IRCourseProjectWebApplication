@@ -60,7 +60,7 @@ module.exports = function(Tweets) {
       var collection = db.collection('Categories');
       collection.find().toArray(function(err, docs) {
         if(err) throw err;
-        console.log(docs[0][category]);
+        // console.log(docs[0][category]);
         cb(null, docs[0][category]);
       });
     });

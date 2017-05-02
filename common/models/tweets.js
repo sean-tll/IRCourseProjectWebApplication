@@ -48,14 +48,24 @@ module.exports = function(Tweets) {
 
   };
 
-  Tweets.getTweetsByCategory = function(tweet_id, cb) {
+  Tweets.getTweetsByCategory = function(category, cb) {
 
+    var MongoClient = require('mongodb').MongoClient
+      , assert = require('assert');
+    console.log(category);
+    // Connection URL
+    var url = 'mongodb://127.0.0.1:27017/admin';
+    // Use connect method to connect to the Server
+    MongoClient.connect(url, function(err, db) {
+      if(err) throw err;
+      var collection = db.collection('Categories');
+      collection.find().toArray(function(err, docs) {
+        if(err) throw err;
+        console.log(docs[0][category]);
+        cb(null, docs[0][category]);
+      });
+    });
     
-    // Tweets.findById(tweet_id, function (error, instance) {
-    //     var response = instance;
-    //     cb(null, response);
-    //     console.log(response);
-    // });
   };
 
   Tweets.remoteMethod(
@@ -75,7 +85,7 @@ module.exports = function(Tweets) {
     'getTweetsByCategory', {
       http: {path: '/getTweetsByCategory', verb: 'get'},
       accepts: {arg: 'category', type: 'string', http: { source: 'query' } },
-      returns: {arg: 'tweets', type: Object}
+      returns: {arg: 'tweets', type: Array}
     }
   );
 

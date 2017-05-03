@@ -51,7 +51,7 @@ module.exports = function(Tweets) {
 
     var MongoClient = require('mongodb').MongoClient
       , assert = require('assert');
-    console.log(category);
+    //console.log(category);
     // Connection URL
     var url = 'mongodb://127.0.0.1:27017/admin';
     // Use connect method to connect to the Server

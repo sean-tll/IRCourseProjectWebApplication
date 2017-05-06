@@ -31,7 +31,7 @@ module.exports = function(Tweets) {
           });
 
           var res = [];
-          client.get('statuses/home_timeline', {count : 100}, function(error, tweets, response) {
+          client.get('statuses/home_timeline', {count : 200}, function(error, tweets, response) {
             if(error) {
               console.log(error);
               throw error;

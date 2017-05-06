@@ -23,7 +23,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body data-spy="scroll">
 
     <div class="site-wrapper-2">
 
@@ -56,14 +56,23 @@
 
     <div class="container" id="main" ng-controller="TweetsController as controller">
 
-      <div class="row">
+      <div class="col-sm-2">
+        <nav class="nav-sidebar">
+    		<ul class="nav tabs">
+              <li class="side-tab active"><a href="#tab1" ng-click="showAllTweets()" data-toggle="tab">All</a></li>
+              <li class="side-tab"><a href="#tab2" ng-repeat="tag in tags" ng-click="showTweetsByCategory(tag)" data-toggle="tab">{{tag}}</a></li>
+    		</ul>
+    	</nav>
+    </div>
+
+      <!-- <div class="row">
         <div class="btn-group btn-group-lg" role="group" aria-label="...">
           <button type="button" class="btn btn-info" ng-click="showAllTweets()">All</button>
           <button type="button" class="btn btn-info" ng-repeat="tag in tags" ng-click="showTweetsByCategory(tag)">{{tag}}</button>
         </div>
-      </div>
+      </div> -->
 
-
+      <div class="col-sm-10">
 
       <div class="row tweets" ng-show="all">
         <div class="col-sm-4" ng-repeat="tweet in tweets">
@@ -78,6 +87,7 @@
           </twitter-widget>
         </div>
       </div>
+    </div>
 
     </div>
 

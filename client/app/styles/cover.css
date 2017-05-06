@@ -178,6 +178,15 @@ body {
   }
 }
 
+.nav-sidebar a {
+    color: rgb(49,127,235);
+    font-size: 120%;
+    -webkit-transition: all 0.08s linear;
+    -moz-transition: all 0.08s linear;
+    -o-transition: all 0.08s linear;
+    transition: all 0.08s linear;
+}
+
 /*.container.page {
  -moz-column-width: 39em;
  -webkit-column-width: 39em;
